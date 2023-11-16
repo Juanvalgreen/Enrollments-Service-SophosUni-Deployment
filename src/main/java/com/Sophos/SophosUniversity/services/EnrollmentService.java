@@ -131,7 +131,7 @@ public class EnrollmentService implements IEnrollmentService{
                 if (course.getAvailable_places() > 0) {
 
                     // Obtener lista de prerequisitos para el curso
-                    List<Prerequisites> prerequisites = restTemplate.getForObject("http://localhost:9003/api/v1/prerequisites/" + courseId + "/courses", List.class);
+                    List<Prerequisites> prerequisites = restTemplate.getForObject(RestConts.BASE_URL_PREREQUISITES_DEPLOY + "/api/v1/prerequisites/" + courseId + "/courses", List.class);
 
                     // Verificar si el estudiante ha completado los prerequisitos
                     boolean hasCompletedPrerequisites = checkCompletedPrerequisites(studentId, prerequisites);
@@ -198,7 +198,7 @@ public class EnrollmentService implements IEnrollmentService{
     private boolean checkCompletedPrerequisites(Long studentId, List<Prerequisites> prerequisites) {
 
 
-        List<ApprovedCourses> approvedCourses = restTemplate.getForObject(RestConts.BASE_URL_STUDENTS_DEPLOY + "/api/v1/approvedCourses/" + studentId + "/students", List.class);
+        List<ApprovedCourses> approvedCourses = restTemplate.getForObject(RestConts.BASE_URL_APPROVED_DEPLOY + "/api/v1/approvedCourses/" + studentId + "/students", List.class);
 
         if(prerequisites.isEmpty()){
             return true;
